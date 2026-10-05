@@ -1,0 +1,33 @@
+---
+import Icon from './Icon.astro';
+import { SUBJECTS } from '@domain/content';
+---
+<section id="program" class="container section reveal">
+  <div class="sec-head">
+    <span class="eyebrow">PROGRAM</span>
+    <h2 class="h2">Pelajaran yang Kami Dampingi</h2>
+    <p class="lead">Membantu anak memahami materi sekolah dengan pendampingan yang lebih personal.</p>
+  </div>
+  <div class="grid-auto">
+    {SUBJECTS.map((s) => (
+      <div class="card subj">
+        <span class={`icon-box tone-${s.tone}`}><Icon name={s.icon} size={24} width={1.9} /></span>
+        <h3>{s.name}</h3>
+        <p>{s.desc}</p>
+      </div>
+    ))}
+    <div class="tk-note">
+      <span class="eyebrow" style="color:var(--peach-dark)">UNTUK ANAK TK</span>
+      <p>Pengenalan angka &amp; huruf, membaca, menulis, berhitung dasar, dan pendampingan aktivitas belajar.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .subj { padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+  .icon-box { width: 48px; height: 48px; }
+  h3 { font-size: 20px; font-weight: 800; }
+  .subj p { color: var(--text-sec); }
+  .tk-note { border: 1.5px dashed #D9E1F5; border-radius: var(--r-md); padding: 24px; display: flex; flex-direction: column; gap: 10px; justify-content: center; background: var(--surface-soft); }
+  .tk-note p { color: var(--text-2); font-weight: 600; }
+</style>

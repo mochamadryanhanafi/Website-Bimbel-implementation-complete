@@ -1,0 +1,23 @@
+---
+import Icon from './Icon.astro';
+import { BRAND } from '@domain/content';
+---
+<section id="lokasi" class="container section reveal">
+  <div class="box">
+    <div class="map"><iframe title={`Peta lokasi ${BRAND.name}`} src={`https://maps.google.com/maps?q=${BRAND.coords}&z=16&output=embed`} loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+    <div class="info">
+      <span class="icon-box tone-peach"><Icon name="pin" size={24} /></span>
+      <h2 class="h2" style="font-size:clamp(26px,3vw,32px)">Lokasi {BRAND.name}</h2>
+      <p class="lead">{BRAND.location}</p>
+      <a href={`https://www.google.com/maps/search/?api=1&query=${BRAND.coords}`} target="_blank" class="btn btn-outline" style="height:50px">Buka Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .box { background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); }
+  .map { min-height: 320px; position: relative; background: var(--surface-soft); }
+  iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .info { padding: clamp(28px, 4vw, 48px); display: flex; flex-direction: column; gap: 16px; justify-content: center; align-items: flex-start; }
+  .icon-box { width: 48px; height: 48px; }
+</style>

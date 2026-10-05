@@ -1,0 +1,24 @@
+---
+import Icon from './Icon.astro';
+import { WA_ASK } from '@infra/whatsapp';
+---
+<section class="container reveal" style="padding-block:clamp(24px,4vw,48px)">
+  <div class="box">
+    <div class="blob b1"></div><div class="blob b2"></div>
+    <h2 class="h2" style="font-size:clamp(22px,2.8vw,30px);max-width:560px;text-wrap:balance">Siap Membantu Anak Belajar Lebih Nyaman?</h2>
+    <p class="lead" style="color:var(--text-2);max-width:480px;font-size:15px">Konsultasikan kebutuhan belajar anak terlebih dahulu dengan admin.</p>
+    <div class="actions">
+      <button class="btn btn-primary" data-open-modal>Daftarkan Anak</button>
+      <a href={WA_ASK} target="_blank" class="btn btn-wa"><Icon name="wa" size={20} />Chat WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .box { position: relative; overflow: hidden; background: var(--primary-soft); border-radius: var(--r-xl); padding: clamp(24px, 4vw, 40px) clamp(20px, 4vw, 48px); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .box > * { position: relative; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(40px); }
+  .b1 { width: 220px; height: 220px; background: var(--peach); opacity: .16; top: -60px; left: -40px; }
+  .b2 { width: 200px; height: 200px; background: var(--yellow); opacity: .25; bottom: -70px; right: -30px; }
+  .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 4px; }
+</style>

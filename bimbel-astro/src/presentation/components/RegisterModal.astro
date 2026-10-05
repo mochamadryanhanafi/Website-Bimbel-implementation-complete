@@ -1,0 +1,135 @@
+---
+import Icon from './Icon.astro';
+import { PROGRAMS, SESSIONS, rupiah } from '@domain/content';
+---
+<dialog id="register" class="modal">
+  <form method="dialog" class="form" novalidate data-register-form>
+    <div class="head">
+      <div><h3>Daftarkan Anak</h3><p>Admin akan menghubungi via WhatsApp setelah formulir dikirim.</p></div>
+      <button type="button" class="x" aria-label="Tutup" data-close><Icon name="close" size={20} /></button>
+    </div>
+    <div class="row">
+      <label>Nama Orang Tua *<input name="parent" placeholder="cth. Ibu Ani" autocomplete="name" /><small class="err" data-err="parent"></small></label>
+      <label>Nama Anak *<input name="child" placeholder="cth. Aisyah Putri" /><small class="err" data-err="child"></small></label>
+    </div>
+    <fieldset>
+      <legend>Jenjang *</legend>
+      <div class="choices">
+        {PROGRAMS.map((p) => <label class="choice"><input type="radio" name="level" value={p.level} /><span>{p.level}<small>{rupiah(p.promoPrice)}/bln</small></span></label>)}
+      </div>
+      <small class="err" data-err="level"></small>
+    </fieldset>
+    <div class="row">
+      <label>Kelas<select name="kelas" disabled><option value="">Pilih jenjang dulu</option></select></label>
+      <label>Nomor WhatsApp *<input name="wa" inputmode="tel" placeholder="08xx xxxx xxxx" autocomplete="tel" /><small class="err" data-err="wa"></small></label>
+    </div>
+    <fieldset>
+      <legend>Pilihan Sesi *</legend>
+      <div class="choices">
+        {SESSIONS.map((s) => <label class="choice"><input type="radio" name="sesi" value={s.id} /><span>{s.name.split(' · ')[0]}<small>{s.time.replace(/ /g, '')}</small></span></label>)}
+      </div>
+      <small class="err" data-err="sesi"></small>
+    </fieldset>
+    <label>Catatan <em>(opsional)</em><textarea name="note" rows="3" placeholder="cth. anak perlu bantuan membaca"></textarea></label>
+    <button type="submit" class="btn btn-primary">Daftarkan Anak</button>
+  </form>
+
+  <div class="done" hidden data-done>
+    <span class="icon-box tone-green"><Icon name="check" size={34} width={2.4} /></span>
+    <h3>Pendaftaran berhasil</h3>
+    <p>Silakan lanjutkan konfirmasi dengan admin melalui WhatsApp.</p>
+    <dl class="summary">
+      <dt>Anak</dt><dd data-sum="child"></dd>
+      <dt>Jenjang</dt><dd data-sum="level"></dd>
+      <dt>Sesi</dt><dd data-sum="sesi"></dd>
+    </dl>
+    <a href="#" target="_blank" class="btn btn-wa" style="width:100%" data-wa-done>Lanjut ke WhatsApp</a>
+    <button type="button" class="ghost" data-close>Tutup</button>
+  </div>
+</dialog>
+
+<style>
+  .modal { width: 100%; max-width: 560px; max-height: 92vh; padding: 0; border: 0; border-radius: 16px; box-shadow: 0 18px 60px rgba(40,60,100,.18); color: var(--text); }
+  .modal::backdrop { background: rgba(38,50,72,.38); backdrop-filter: blur(4px); }
+  @media (max-width: 767px) { .modal { margin: auto 0 0; max-width: none; max-height: 94vh; border-radius: 16px 16px 0 0; } }
+  .form { padding: clamp(22px, 4vw, 32px); display: flex; flex-direction: column; gap: 18px; }
+  .head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  h3 { font-size: 24px; font-weight: 800; }
+  .head p { margin-top: 4px; color: var(--text-sec); font-size: 15px; }
+  .x { flex: none; width: 44px; height: 44px; border-radius: 8px; border: 1px solid var(--border); background: #fff; display: grid; place-items: center; cursor: pointer; color: var(--text-sec); }
+  .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  label, fieldset { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 700; }
+  fieldset { border: 0; padding: 0; margin: 0; }
+  legend { padding: 0; margin-bottom: 6px; }
+  label em { font-style: normal; font-weight: 600; color: var(--text-muted); }
+  input:not([type=radio]), select, textarea { height: 50px; padding: 0 14px; border: 1px solid var(--border-input); border-radius: 8px; font-size: 16px; color: var(--text); background: #fff; outline: none; font-weight: 600; }
+  textarea { height: auto; padding: 12px 14px; resize: vertical; }
+  input:focus, select:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(111,143,216,.12); }
+  .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .choice { position: relative; }
+  .choice input { position: absolute; opacity: 0; inset: 0; }
+  .choice span { height: 56px; border-radius: var(--r-sm); border: 1.5px solid var(--border-input); background: #fff; font-size: 16px; font-weight: 800; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.2; cursor: pointer; }
+  .choice small { font-size: 13px; font-weight: 600; color: var(--text-sec); }
+  .choice input:checked + span { border-color: var(--primary); background: var(--primary-soft); }
+  .choice input:focus-visible + span { box-shadow: 0 0 0 4px rgba(111,143,216,.12); }
+  .err { color: var(--danger); font-size: 13px; }
+  .err:empty { display: none; }
+  .done { padding: clamp(28px, 5vw, 44px); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+  .done[hidden] { display: none; }
+  .done .icon-box { width: 72px; height: 72px; border-radius: 50%; }
+  .done p { color: var(--text-sec); max-width: 380px; }
+  .summary { width: 100%; margin: 0; background: var(--surface-soft); border-radius: var(--r-sm); padding: 16px; display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; text-align: left; font-size: 15px; }
+  dt { color: var(--text-sec); } dd { margin: 0; font-weight: 700; }
+  .ghost { height: 44px; border: 0; background: none; color: var(--text-sec); font-weight: 700; font-size: 15px; cursor: pointer; }
+</style>
+
+<script>
+  import { PROGRAMS } from '@domain/content';
+  import { buildWaMessage, levelLabel, sessionLabel, validate } from '@app/registration';
+  import { waLink } from '@infra/whatsapp';
+  import type { Registration } from '@domain/types';
+
+  const dlg = document.getElementById('register') as HTMLDialogElement;
+  const form = dlg.querySelector<HTMLFormElement>('[data-register-form]')!;
+  const done = dlg.querySelector<HTMLElement>('[data-done]')!;
+  const kelas = form.elements.namedItem('kelas') as HTMLSelectElement;
+
+  const read = (): Registration => {
+    const d = new FormData(form);
+    const g = (k: string) => String(d.get(k) ?? '');
+    return { parent: g('parent'), child: g('child'), level: g('level') as Registration['level'], kelas: g('kelas'), wa: g('wa'), sesi: g('sesi') as Registration['sesi'], note: g('note') };
+  };
+
+  const setLevel = (level: string) => {
+    const p = PROGRAMS.find((x) => x.level === level);
+    kelas.disabled = !p;
+    kelas.innerHTML = `<option value="">${p ? 'Pilih kelas' : 'Pilih jenjang dulu'}</option>` + (p?.classes.map((c) => `<option>${c}</option>`).join('') ?? '');
+  };
+
+  const open = (level?: string) => {
+    form.hidden = false; done.hidden = true;
+    form.querySelectorAll<HTMLElement>('[data-err]').forEach((e) => (e.textContent = ''));
+    if (level) { (form.querySelector(`input[name=level][value=${level}]`) as HTMLInputElement).checked = true; setLevel(level); }
+    dlg.showModal();
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-open-modal]').forEach((b) => b.addEventListener('click', () => open(b.dataset.level)));
+  dlg.querySelectorAll('[data-close]').forEach((b) => b.addEventListener('click', () => dlg.close()));
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+  form.querySelectorAll<HTMLInputElement>('input[name=level]').forEach((r) => r.addEventListener('change', () => setLevel(r.value)));
+  form.addEventListener('input', (e) => { const n = (e.target as HTMLInputElement).name; const el = form.querySelector(`[data-err=${n}]`); if (el) el.textContent = ''; });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const r = read();
+    const errs = validate(r);
+    form.querySelectorAll<HTMLElement>('[data-err]').forEach((el) => (el.textContent = errs[el.dataset.err as keyof typeof errs] ?? ''));
+    if (Object.keys(errs).length) return;
+    // ponytail: no backend; registration goes to WA only. Add fetch('/api/register') here when admin panel exists.
+    done.querySelector('[data-sum=child]')!.textContent = r.child;
+    done.querySelector('[data-sum=level]')!.textContent = levelLabel(r.level) + (r.kelas ? ` · ${r.kelas}` : '');
+    done.querySelector('[data-sum=sesi]')!.textContent = sessionLabel(r.sesi);
+    (done.querySelector('[data-wa-done]') as HTMLAnchorElement).href = waLink(buildWaMessage(r));
+    form.hidden = true; done.hidden = false;
+  });
+</script>

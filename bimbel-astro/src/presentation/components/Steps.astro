@@ -1,0 +1,34 @@
+---
+import Icon from './Icon.astro';
+import { STEPS } from '@domain/content';
+---
+<section class="container section reveal">
+  <div class="box">
+    <div class="sec-head center" style="margin-bottom:40px;max-width:none">
+      <span class="eyebrow">CARA MENDAFTAR</span>
+      <h2 class="h2">Daftar Tidak Perlu Ribet</h2>
+    </div>
+    <div class="grid-auto" style="--min:200px;gap:28px">
+      {STEPS.map((s, i) => (
+        <div class="step">
+          <span class={`icon-box tone-${s.tone}`}><Icon name={s.icon} size={26} width={1.9} /></span>
+          <span class="num">{String(i + 1).padStart(2, '0')}</span>
+          <b>{s.title}</b>
+          <small>{s.desc}</small>
+        </div>
+      ))}
+    </div>
+    <div class="cta"><button class="btn btn-primary" data-open-modal>Isi Formulir Pendaftaran</button></div>
+  </div>
+</section>
+
+<style>
+  .box { background: #fff; border: 1px solid var(--border); border-radius: var(--r-xl); padding: clamp(28px, 4vw, 56px); }
+  .step { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+  .icon-box { width: 64px; height: 64px; border-radius: 50%; }
+  .num { font-weight: 900; color: var(--text-muted); font-size: 14px; letter-spacing: .1em; }
+  b { font-weight: 800; font-size: 18px; }
+  small { color: var(--text-sec); font-size: 15px; }
+  .cta { display: flex; justify-content: center; margin-top: 40px; }
+  .cta .btn { padding: 0 32px; }
+</style>

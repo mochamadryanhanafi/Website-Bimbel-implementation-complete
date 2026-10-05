@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro';
+const items = [
+  { icon: 'users', tone: 'primary', title: 'TK & SD', sub: 'Jenjang' },
+  { icon: 'clock', tone: 'peach', title: '2 Pilihan', sub: 'Sesi belajar' },
+  { icon: 'calendar', tone: 'green', title: 'Kamis–Minggu', sub: 'Jadwal' },
+  { icon: 'tag', tone: 'yellow', title: 'Promo 85K', sub: 'Per bulan' },
+];
+---
+<section class="container strip">
+  <div class="grid-auto" style="--min:220px;gap:16px">
+    {items.map((i) => (
+      <div class="card item">
+        <span class={`icon-box tone-${i.tone}`}><Icon name={i.icon} /></span>
+        <span class="txt"><b>{i.title}</b><small>{i.sub}</small></span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .strip { margin-top: -36px; position: relative; z-index: 2; }
+  .item { padding: 20px; display: flex; align-items: center; gap: 14px; }
+  .icon-box { width: 44px; height: 44px; }
+  .txt { display: flex; flex-direction: column; line-height: 1.3; }
+  .txt b { font-weight: 800; font-size: 18px; }
+  .txt small { font-size: 14px; color: var(--text-sec); font-weight: 600; }
+</style>

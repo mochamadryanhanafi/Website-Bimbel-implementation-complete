@@ -1,0 +1,30 @@
+---
+import '../styles/global.css';
+import { BRAND } from '@domain/content';
+interface Props { title?: string }
+const { title = `${BRAND.name} — Bimbingan Belajar TK & SD` } = Astro.props;
+---
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content="Pendampingan belajar anak TK dan SD di Warujayeng, Nganjuk. Jadwal Kamis–Minggu, 2 pilihan sesi." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <slot />
+    <script>
+      // reveal-on-scroll; ponytail: IntersectionObserver only, no fallback (all modern browsers)
+      const io = new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      }), { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach((el) => {
+        if (el.getBoundingClientRect().top < innerHeight * 0.9) el.classList.add('in');
+        else io.observe(el);
+      });
+    </script>
+  </body>
+</html>

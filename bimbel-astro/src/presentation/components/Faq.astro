@@ -1,0 +1,29 @@
+---
+import { FAQS } from '@domain/content';
+---
+<section id="faq" class="container section reveal faq">
+  <div class="sec-head center" style="margin-bottom:36px">
+    <span class="eyebrow">FAQ</span>
+    <h2 class="h2">Pertanyaan yang Sering Ditanyakan</h2>
+  </div>
+  <div class="list">
+    {FAQS.map((f) => (
+      <details name="faq">
+        <summary>{f.q}<span class="pm" aria-hidden="true"></span></summary>
+        <p>{f.a}</p>
+      </details>
+    ))}
+  </div>
+</section>
+
+<style>
+  .faq { max-width: 820px; }
+  .list { display: flex; flex-direction: column; gap: 12px; }
+  details { background: #fff; border: 1px solid var(--border); border-radius: 12px; }
+  summary { list-style: none; min-height: 64px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 17px; font-weight: 700; cursor: pointer; }
+  summary::-webkit-details-marker { display: none; }
+  .pm { flex: none; width: 32px; height: 32px; border-radius: 8px; background: var(--primary-soft); color: var(--primary-dark); display: grid; place-items: center; font-size: 20px; font-weight: 800; }
+  .pm::before { content: '+'; }
+  details[open] .pm::before { content: '−'; }
+  details p { padding: 0 20px 20px; color: var(--text-sec); }
+</style>

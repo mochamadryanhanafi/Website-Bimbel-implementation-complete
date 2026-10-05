@@ -1,0 +1,35 @@
+---
+import Icon from './Icon.astro';
+import { SESSIONS } from '@domain/content';
+---
+<section id="jadwal" class="container section reveal">
+  <div class="wrap">
+    <div class="sec-head" style="margin:0">
+      <span class="eyebrow">JADWAL</span>
+      <h2 class="h2">Pilih Jadwal yang Nyaman</h2>
+      <p class="lead" style="max-width:440px">Belajar setiap Kamis sampai Minggu. Pilih sesi sore atau malam sesuai rutinitas anak.</p>
+    </div>
+    <div class="grid-auto" style="--min:230px;gap:18px">
+      {SESSIONS.map((s, i) => (
+        <div class="card sess">
+          <div class="head">
+            <span class={`icon-box ${i === 0 ? 'tone-yellow' : 'tone-primary'}`}><Icon name={i === 0 ? 'sun' : 'moon'} /></span>
+            <b>{s.name}</b>
+          </div>
+          <div class="time">{s.time}</div>
+          <div class="days">{s.days}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: clamp(28px, 4vw, 56px); align-items: center; }
+  .sess { border-radius: 16px; padding: 26px; display: flex; flex-direction: column; gap: 16px; }
+  .head { display: flex; align-items: center; gap: 12px; }
+  .head b { font-weight: 800; font-size: 17px; }
+  .icon-box { width: 44px; height: 44px; }
+  .time { font-size: 34px; font-weight: 900; letter-spacing: -.02em; line-height: 1; }
+  .days { color: var(--text-sec); font-weight: 600; }
+</style>

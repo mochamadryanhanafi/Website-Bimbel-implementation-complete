@@ -1,0 +1,35 @@
+---
+import Base from '@ui/layouts/Base.astro';
+import Navbar from '@ui/components/Navbar.astro';
+import Hero from '@ui/components/Hero.astro';
+import Highlights from '@ui/components/Highlights.astro';
+import Pricing from '@ui/components/Pricing.astro';
+import Programs from '@ui/components/Programs.astro';
+import Schedule from '@ui/components/Schedule.astro';
+import Steps from '@ui/components/Steps.astro';
+import About from '@ui/components/About.astro';
+import Faq from '@ui/components/Faq.astro';
+import Location from '@ui/components/Location.astro';
+import FinalCta from '@ui/components/FinalCta.astro';
+import Footer from '@ui/components/Footer.astro';
+import FloatingCta from '@ui/components/FloatingCta.astro';
+import RegisterModal from '@ui/components/RegisterModal.astro';
+---
+<Base>
+  <Navbar />
+  <main>
+    <Hero />
+    <Highlights />
+    <Pricing showSdBadge={false} />
+    <Programs />
+    <Schedule />
+    <Steps />
+    <About />
+    <Faq />
+    <Location />
+    <FinalCta />
+  </main>
+  <Footer />
+  <FloatingCta sticky />
+  <RegisterModal />
+</Base>

@@ -1,0 +1,23 @@
+---
+import { BRAND } from '@domain/content';
+import { WA_ASK } from '@infra/whatsapp';
+---
+<footer class="reveal">
+  <div class="container cols">
+    <div class="col"><b class="name">{BRAND.name}</b><span class="lead" style="font-size:15px">Pendampingan belajar untuk anak TK dan SD.</span></div>
+    <div class="col"><span class="hd">PROGRAM</span><a href="#biaya">TK</a><a href="#biaya">SD</a><a href="#jadwal">Jadwal</a><a href="#biaya">Biaya</a></div>
+    <div class="col"><span class="hd">INFORMASI</span><a href="#tentang">Tentang</a><a href="#faq">FAQ</a><a href="#lokasi">Kontak</a></div>
+    <div class="col"><span class="hd">KONTAK</span><a href={WA_ASK} target="_blank">WhatsApp</a><a href="#lokasi">{BRAND.location.split(',')[0]}, Nganjuk</a></div>
+  </div>
+  <div class="container copy">© {new Date().getFullYear()} {BRAND.name}</div>
+</footer>
+
+<style>
+  footer { background: #fff; border-top: 1px solid var(--border); }
+  .cols { padding-block: 56px 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 32px; }
+  .col { display: flex; flex-direction: column; gap: 10px; font-size: 15px; }
+  .col a { color: var(--text-2); }
+  .name { font-weight: 800; font-size: 18px; }
+  .hd { font-weight: 800; font-size: 13px; letter-spacing: .1em; color: var(--text-muted); }
+  .copy { padding-block: 20px 96px; border-top: 1px solid var(--border-2); color: var(--text-muted); font-size: 14px; }
+</style>
